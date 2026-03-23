@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo - Sistema Corporativo</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="stylesheet" href="/static/css/forms.css">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body data-module="modulo">
+  <div class="layout">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">PC</div>
+          <div>
+            <div>Sistema Corporativo</div>
+            <small>Seguridad / Módulo</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span id="topbarUser">Usuario</span>
+          <button class="btn btn-danger" id="btnLogout" type="button">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="green-line"></div>
+
+    <main class="main-shell">
+      <aside class="sidebar">
+        <div class="menu-title">Menú principal</div>
+        <div id="sidebarMenu"></div>
+      </aside>
+
+      <section class="content">
+        <nav class="breadcrumb">
+          <a href="/dashboard">Inicio</a>
+          <span>/</span>
+          <span>Seguridad</span>
+          <span>/</span>
+          <span class="current">Módulo</span>
+        </nav>
+
+        <div class="card">
+          <h1 class="page-title">Módulo Módulo</h1>
+          <p class="page-subtitle">Administra los módulos funcionales y estáticos del sistema.</p>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <button class="btn btn-success" id="btnNuevoModulo">Nuevo</button>
+            <button class="btn btn-info" id="btnBuscarModulo">Consultar</button>
+          </div>
+
+          <form id="formModulo" class="form-grid hidden">
+            <input type="hidden" id="moduloId">
+
+            <div class="form-group">
+              <label for="strNombreModulo">Nombre del módulo</label>
+              <input type="text" id="strNombreModulo" maxlength="100" required>
+              <small class="error-text" id="errorNombreModulo"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="strClaveModulo">Clave del módulo</label>
+              <input type="text" id="strClaveModulo" maxlength="100" required>
+              <small class="error-text" id="errorClaveModulo"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="strRutaModulo">Ruta</label>
+              <input type="text" id="strRutaModulo" maxlength="150" required placeholder="/seguridad/perfil">
+              <small class="error-text" id="errorRutaModulo"></small>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="bitEstaticoModulo">
+                Es módulo estático
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-secondary" id="btnCancelarModulo">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Clave</th>
+                  <th>Ruta</th>
+                  <th>Estático</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaModulos">
+                <tr>
+                  <td colspan="6" class="table-empty">Sin datos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="paginacionModulos"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/utils.js"></script>
+  <script src="/static/js/menu.js"></script>
+  <script src="/static/js/modulo.js"></script>
+</body>
+</html>

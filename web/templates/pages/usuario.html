@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuario - Sistema Corporativo</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="stylesheet" href="/static/css/forms.css">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body data-module="usuario">
+  <div class="layout">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">PC</div>
+          <div>
+            <div>Sistema Corporativo</div>
+            <small>Seguridad / Usuario</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span id="topbarUser">Usuario</span>
+          <button class="btn btn-danger" id="btnLogout" type="button">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="green-line"></div>
+
+    <main class="main-shell">
+      <aside class="sidebar">
+        <div class="menu-title">Menú principal</div>
+        <div id="sidebarMenu"></div>
+      </aside>
+
+      <section class="content">
+        <nav class="breadcrumb">
+          <a href="/dashboard">Inicio</a>
+          <span>/</span>
+          <span>Seguridad</span>
+          <span>/</span>
+          <span class="current">Usuario</span>
+        </nav>
+
+        <div class="card">
+          <h1 class="page-title">Módulo Usuario</h1>
+          <p class="page-subtitle">Gestión de usuarios con imagen, perfil, estado y contacto.</p>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <button class="btn btn-success" id="btnNuevoUsuario">Nuevo</button>
+            <button class="btn btn-info" id="btnBuscarUsuario">Consultar</button>
+          </div>
+
+          <form id="formUsuario" class="form-grid hidden" enctype="multipart/form-data">
+            <input type="hidden" id="usuarioId">
+
+            <div class="form-group">
+              <label for="strNombreUsuario">Nombre de usuario</label>
+              <input type="text" id="strNombreUsuario" maxlength="100" required>
+              <small class="error-text" id="errorNombreUsuario"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="idPerfilUsuario">Perfil</label>
+              <select id="idPerfilUsuario" required>
+                <option value="">Seleccione</option>
+              </select>
+              <small class="error-text" id="errorPerfilUsuario"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="strPwd">Contraseña</label>
+              <input type="password" id="strPwd" maxlength="100" required>
+              <small class="error-text" id="errorPwdUsuario"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="idEstadoUsuario">Estado</label>
+              <select id="idEstadoUsuario" required>
+                <option value="">Seleccione</option>
+                <option value="1">ACTIVO</option>
+                <option value="2">INACTIVO</option>
+              </select>
+              <small class="error-text" id="errorEstadoUsuario"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="strCorreo">Correo electrónico</label>
+              <input type="email" id="strCorreo" maxlength="150" required>
+              <small class="error-text" id="errorCorreoUsuario"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="strNumeroCelular">Número celular</label>
+              <input type="text" id="strNumeroCelular" maxlength="15" required>
+              <small class="error-text" id="errorCelularUsuario"></small>
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="imagenUsuario">Imagen del usuario</label>
+              <input type="file" id="imagenUsuario" accept=".jpg,.jpeg,.png,.webp">
+              <small class="error-text" id="errorImagenUsuario"></small>
+
+              <div class="image-preview-box">
+                <img id="previewImagenUsuario" class="image-preview hidden" alt="Vista previa">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-secondary" id="btnCancelarUsuario">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Imagen</th>
+                  <th>Usuario</th>
+                  <th>Perfil</th>
+                  <th>Estado</th>
+                  <th>Correo</th>
+                  <th>Celular</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaUsuarios">
+                <tr>
+                  <td colspan="8" class="table-empty">Sin datos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="paginacionUsuarios"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/utils.js"></script>
+  <script src="/static/js/menu.js"></script>
+  <script src="/static/js/usuario.js"></script>
+</body>
+</html>

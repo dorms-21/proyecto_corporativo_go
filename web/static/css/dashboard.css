@@ -1,0 +1,16 @@
+.sidebar .menu-title {
+  margin-bottom: 14px;
+}
+
+.content .card:first-child {
+  margin-bottom: 18px;
+}
+
+.dashboard-stat {
+  min-height: 140px;
+}
+
+.dashboard-stat p {
+  color: var(--color-muted);
+  margin-bottom: 0;
+}

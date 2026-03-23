@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permisos-Perfil - Sistema Corporativo</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="stylesheet" href="/static/css/forms.css">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body data-module="permisos_perfil">
+  <div class="layout">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">PC</div>
+          <div>
+            <div>Sistema Corporativo</div>
+            <small>Seguridad / Permisos-Perfil</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span id="topbarUser">Usuario</span>
+          <button class="btn btn-danger" id="btnLogout" type="button">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="green-line"></div>
+
+    <main class="main-shell">
+      <aside class="sidebar">
+        <div class="menu-title">Menú principal</div>
+        <div id="sidebarMenu"></div>
+      </aside>
+
+      <section class="content">
+        <nav class="breadcrumb">
+          <a href="/dashboard">Inicio</a>
+          <span>/</span>
+          <span>Seguridad</span>
+          <span>/</span>
+          <span class="current">Permisos-Perfil</span>
+        </nav>
+
+        <div class="card">
+          <h1 class="page-title">Módulo Permisos-Perfil</h1>
+          <p class="page-subtitle">Asignación de permisos CRUD por perfil y por módulo. Sin filtrado.</p>
+        </div>
+
+        <div class="card">
+          <form id="formPermisosPerfil" class="form-grid">
+            <input type="hidden" id="permisoPerfilId">
+
+            <div class="form-group">
+              <label for="idPerfilPermiso">Perfil</label>
+              <select id="idPerfilPermiso" required>
+                <option value="">Seleccione</option>
+              </select>
+              <small class="error-text" id="errorPerfilPermiso"></small>
+            </div>
+
+            <div class="form-group">
+              <label for="idModuloPermiso">Módulo</label>
+              <select id="idModuloPermiso" required>
+                <option value="">Seleccione</option>
+              </select>
+              <small class="error-text" id="errorModuloPermiso"></small>
+            </div>
+
+            <div class="permissions-grid form-group-full">
+              <label class="permission-item">
+                <input type="checkbox" id="bitAgregar"> Agregar
+              </label>
+              <label class="permission-item">
+                <input type="checkbox" id="bitEditar"> Editar
+              </label>
+              <label class="permission-item">
+                <input type="checkbox" id="bitConsulta"> Consulta
+              </label>
+              <label class="permission-item">
+                <input type="checkbox" id="bitEliminar"> Eliminar
+              </label>
+              <label class="permission-item">
+                <input type="checkbox" id="bitDetalle"> Detalle
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-secondary" id="btnCancelarPermiso">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Perfil</th>
+                  <th>Módulo</th>
+                  <th>Agregar</th>
+                  <th>Editar</th>
+                  <th>Consulta</th>
+                  <th>Eliminar</th>
+                  <th>Detalle</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaPermisosPerfil">
+                <tr>
+                  <td colspan="9" class="table-empty">Sin datos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="paginacionPermisos"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/utils.js"></script>
+  <script src="/static/js/menu.js"></script>
+  <script src="/static/js/permisos_perfil.js"></script>
+</body>
+</html>

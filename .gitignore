@@ -1,0 +1,16 @@
+# binarios
+*.exe
+*.out
+
+# dependencias
+/vendor/
+
+# entorno
+.env
+
+# uploads
+uploads/
+
+# sistema
+.DS_Store
+Thumbs.db

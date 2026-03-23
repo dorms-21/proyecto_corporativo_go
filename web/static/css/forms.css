@@ -1,0 +1,40 @@
+.form-section-title {
+  margin: 0 0 12px;
+  color: var(--color-primary);
+  font-size: 1.1rem;
+}
+
+.input-readonly {
+  background: #f8fafc !important;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal-card {
+  width: min(520px, 100%);
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
+  border: 1px solid var(--color-border);
+  padding: 20px;
+}
+
+.modal-title {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}

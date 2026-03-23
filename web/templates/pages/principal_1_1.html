@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principal 1.1 - Sistema Corporativo</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="stylesheet" href="/static/css/forms.css">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body data-module="principal_1_1">
+  <div class="layout">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">PC</div>
+          <div>
+            <div>Sistema Corporativo</div>
+            <small>Principal 1 / Principal 1.1</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span id="topbarUser">Usuario</span>
+          <button class="btn btn-danger" id="btnLogout" type="button">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="green-line"></div>
+
+    <main class="main-shell">
+      <aside class="sidebar">
+        <div class="menu-title">Menú principal</div>
+        <div id="sidebarMenu"></div>
+      </aside>
+
+      <section class="content">
+        <nav class="breadcrumb">
+          <a href="/dashboard">Inicio</a>
+          <span>/</span>
+          <span>Principal 1</span>
+          <span>/</span>
+          <span class="current">Principal 1.1</span>
+        </nav>
+
+        <div class="card">
+          <h1 class="page-title">Principal 1.1</h1>
+          <p class="page-subtitle">Pantalla estática con botones CRUD visuales.</p>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <button class="btn btn-success">Nuevo</button>
+            <button class="btn btn-info">Consultar</button>
+            <button class="btn btn-warning">Editar</button>
+            <button class="btn btn-danger">Eliminar</button>
+            <button class="btn btn-secondary">Detalle</button>
+          </div>
+
+          <form class="form-grid">
+            <div class="form-group">
+              <label>Campo 1</label>
+              <input type="text" placeholder="Escribe aquí">
+            </div>
+
+            <div class="form-group">
+              <label>Campo 2</label>
+              <input type="text" placeholder="Escribe aquí">
+            </div>
+
+            <div class="form-group">
+              <label>Campo 3</label>
+              <select>
+                <option>Seleccione</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Campo 4</label>
+              <input type="date">
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/utils.js"></script>
+  <script src="/static/js/menu.js"></script>
+  <script src="/static/js/principal.js"></script>
+</body>
+</html>

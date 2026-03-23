@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - Sistema Corporativo</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/dashboard.css">
+  <link rel="stylesheet" href="/static/css/forms.css">
+  <link rel="stylesheet" href="/static/css/responsive.css">
+</head>
+<body data-module="perfil">
+  <div class="layout">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="brand">
+          <div class="brand-badge">PC</div>
+          <div>
+            <div>Sistema Corporativo</div>
+            <small>Seguridad / Perfil</small>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span id="topbarUser">Usuario</span>
+          <button class="btn btn-danger" id="btnLogout" type="button">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="green-line"></div>
+
+    <main class="main-shell">
+      <aside class="sidebar">
+        <div class="menu-title">Menú principal</div>
+        <div id="sidebarMenu"></div>
+      </aside>
+
+      <section class="content">
+        <nav class="breadcrumb">
+          <a href="/dashboard">Inicio</a>
+          <span>/</span>
+          <span>Seguridad</span>
+          <span>/</span>
+          <span class="current">Perfil</span>
+        </nav>
+
+        <div class="card">
+          <h1 class="page-title">Módulo Perfil</h1>
+          <p class="page-subtitle">CRUD de perfiles con validación y paginación de 5 registros.</p>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <button class="btn btn-success" id="btnNuevoPerfil">Nuevo</button>
+            <button class="btn btn-info" id="btnBuscarPerfil">Consultar</button>
+          </div>
+
+          <form id="formPerfil" class="form-grid hidden">
+            <input type="hidden" id="perfilId">
+
+            <div class="form-group">
+              <label for="strNombrePerfil">Nombre del perfil</label>
+              <input type="text" id="strNombrePerfil" maxlength="100" required>
+              <small class="error-text" id="errorNombrePerfil"></small>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="bitAdministrador">
+                Es administrador
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-secondary" id="btnCancelarPerfil">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre Perfil</th>
+                  <th>Administrador</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tablaPerfiles">
+                <tr>
+                  <td colspan="4" class="table-empty">Sin datos</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="paginacionPerfiles"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/js/utils.js"></script>
+  <script src="/static/js/menu.js"></script>
+  <script src="/static/js/perfil.js"></script>
+</body>
+</html>

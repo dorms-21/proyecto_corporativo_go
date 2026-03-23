@@ -1,0 +1,72 @@
+@media (max-width: 1100px) {
+  .main-shell {
+    grid-template-columns: 240px 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .main-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+
+  .content {
+    order: 1;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar-actions {
+    justify-content: space-between;
+  }
+
+  .login-logo-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .login-title {
+    font-size: 1.8rem;
+  }
+
+  .toolbar,
+  .form-actions,
+  .pagination {
+    justify-content: stretch;
+  }
+
+  .toolbar .btn,
+  .form-actions .btn,
+  .login-actions .btn {
+    width: 100%;
+  }
+
+  .captcha-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .captcha-preview {
+    width: 100%;
+  }
+}
