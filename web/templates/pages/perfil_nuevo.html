@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Usuario - Sistema Corporativo</title>
+  <title>Nuevo Perfil</title>
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="stylesheet" href="/static/css/dashboard.css">
   <link rel="stylesheet" href="/static/css/forms.css">
   <link rel="stylesheet" href="/static/css/responsive.css">
 </head>
-<body data-module="usuario">
+<body>
   <div class="layout">
     <header class="topbar">
       <div class="topbar-inner">
@@ -17,7 +17,7 @@
           <div class="brand-badge">PC</div>
           <div>
             <div>Sistema Corporativo</div>
-            <small>Seguridad / Usuario</small>
+            <small>Seguridad / Perfil / Nuevo</small>
           </div>
         </div>
         <div class="topbar-actions">
@@ -39,46 +39,36 @@
         <nav class="breadcrumb">
           <a href="/dashboard">Inicio</a>
           <span>/</span>
-          <span>Seguridad</span>
+          <a href="/seguridad/perfil">Perfil</a>
           <span>/</span>
-          <span class="current">Usuario</span>
+          <span class="current">Nuevo</span>
         </nav>
 
         <div class="card">
-          <h1 class="page-title">Módulo Usuario</h1>
-          <p class="page-subtitle">Gestión de usuarios con imagen, perfil, estado y contacto.</p>
+          <h1 class="page-title">Nuevo Perfil</h1>
+          <p class="page-subtitle">Registra un nuevo perfil en el sistema.</p>
         </div>
 
         <div class="card">
-          <div class="toolbar">
-            <button class="btn btn-success" id="btnNuevoUsuario">Nuevo</button>
-            <button class="btn btn-info" id="btnBuscarUsuario">Consultar</button>
-          </div>
-        </div>
+          <form id="formPerfilNuevo" class="form-grid">
+            <div class="form-group">
+              <label for="strNombrePerfil">Nombre del perfil</label>
+              <input type="text" id="strNombrePerfil" maxlength="100" required>
+              <small class="error-text" id="errorNombrePerfil"></small>
+            </div>
 
-        <div class="card">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Imagen</th>
-                  <th>Usuario</th>
-                  <th>Perfil</th>
-                  <th>Estado</th>
-                  <th>Correo</th>
-                  <th>Celular</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tablaUsuarios">
-                <tr>
-                  <td colspan="7" class="table-empty">Sin datos</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="bitAdministrador">
+                Es administrador
+              </label>
+            </div>
 
-          <div class="pagination" id="paginacionUsuarios"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-success">Guardar</button>
+              <a href="/seguridad/perfil" class="btn btn-secondary">Cancelar</a>
+            </div>
+          </form>
         </div>
       </section>
     </main>
@@ -86,6 +76,6 @@
 
   <script src="/static/js/utils.js"></script>
   <script src="/static/js/menu.js"></script>
-  <script src="/static/js/usuario.js"></script>
+  <script src="/static/js/perfil_nuevo.js"></script>
 </body>
 </html>

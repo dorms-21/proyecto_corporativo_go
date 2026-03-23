@@ -54,28 +54,6 @@
             <button class="btn btn-success" id="btnNuevoPerfil">Nuevo</button>
             <button class="btn btn-info" id="btnBuscarPerfil">Consultar</button>
           </div>
-
-          <form id="formPerfil" class="form-grid hidden">
-            <input type="hidden" id="perfilId">
-
-            <div class="form-group">
-              <label for="strNombrePerfil">Nombre del perfil</label>
-              <input type="text" id="strNombrePerfil" maxlength="100" required>
-              <small class="error-text" id="errorNombrePerfil"></small>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <label>
-                <input type="checkbox" id="bitAdministrador">
-                Es administrador
-              </label>
-            </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-success">Guardar</button>
-              <button type="button" class="btn btn-secondary" id="btnCancelarPerfil">Cancelar</button>
-            </div>
-          </form>
         </div>
 
         <div class="card">
@@ -83,7 +61,6 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Nombre Perfil</th>
                   <th>Administrador</th>
                   <th>Acciones</th>
@@ -91,7 +68,7 @@
               </thead>
               <tbody id="tablaPerfiles">
                 <tr>
-                  <td colspan="4" class="table-empty">Sin datos</td>
+                  <td colspan="3" class="table-empty">Sin datos</td>
                 </tr>
               </tbody>
             </table>

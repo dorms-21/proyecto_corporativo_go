@@ -65,13 +65,12 @@ function renderPermisos(rows = []) {
   if (!tbody) return;
 
   if (!rows.length) {
-    tbody.innerHTML = `<tr><td colspan="9" class="table-empty">Sin datos</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" class="table-empty">Sin datos</td></tr>`;
     return;
   }
 
   tbody.innerHTML = rows.map(row => `
     <tr>
-      <td>${row.id}</td>
       <td>${escapeHtml(row.perfilNombre || row.str_nombre_perfil || "")}</td>
       <td>${escapeHtml(row.moduloNombre || row.str_nombre_modulo || "")}</td>
       <td>${toBooleanBadge(row.bitAgregar ?? row.bit_agregar)}</td>
