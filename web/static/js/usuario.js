@@ -100,7 +100,7 @@ function renderUsuarios(rows = []) {
         <td>${escapeHtml(row.strNumeroCelular || row.str_numero_celular || "")}</td>
         <td>
           <div class="table-actions">
-            <button class="btn btn-info btn-table" onclick='editUsuario(${JSON.stringify(row)})'>Editar</button>
+            <button class="btn btn-info btn-table" onclick="goEditUsuario(${row.id})">Editar</button>
             <button class="btn btn-danger btn-table" onclick="deleteUsuario(${row.id})">Eliminar</button>
           </div>
         </td>
@@ -120,6 +120,10 @@ async function loadUsuarios(page = 1) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function goEditUsuario(id) {
+  window.location.href = `/seguridad/usuario/editar/${id}`;
 }
 
 function previewUsuarioImage() {

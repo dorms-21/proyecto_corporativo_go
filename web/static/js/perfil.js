@@ -40,11 +40,11 @@ function renderPerfiles(rows = []) {
   tbody.innerHTML = rows.map(row => `
     <tr>
       <td>${row.id}</td>
-      <td>${escapeHtml(row.strNombrePerfil || row.str_nombre_perfil || "")}</td>
+      <td>${escapeHtml(row.strNombrePerfil || row.str_nombSre_perfil || "")}</td>
       <td>${toBooleanBadge(row.bitAdministrador ?? row.bit_administrador)}</td>
       <td>
         <div class="table-actions">
-          <button class="btn btn-info btn-table" onclick='editPerfil(${JSON.stringify(row)})'>Editar</button>
+          <button class="btn btn-info btn-table" onclick="goEditPerfil(${row.id})">Editar</button>
           <button class="btn btn-danger btn-table" onclick="deletePerfil(${row.id})">Eliminar</button>
         </div>
       </td>
@@ -63,6 +63,10 @@ async function loadPerfiles(page = 1) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function goEditPerfil(id) {
+  window.location.href = `/seguridad/perfil/editar/${id}`;
 }
 
 function editPerfil(row) {

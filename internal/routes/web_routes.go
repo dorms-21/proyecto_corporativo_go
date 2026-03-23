@@ -31,6 +31,11 @@ func RegisterWebRoutes(mux *http.ServeMux, database *sql.DB, cfg *config.Config)
 	mux.HandleFunc("/principal2/principal-2-1", renderPage("principal_2_1.html"))
 	mux.HandleFunc("/principal2/principal-2-2", renderPage("principal_2_2.html"))
 
+	mux.HandleFunc("/seguridad/perfil/editar/", renderPage("perfil_editar.html"))
+	mux.HandleFunc("/seguridad/modulo/editar/", renderPage("modulo_editar.html"))
+	mux.HandleFunc("/seguridad/usuario/editar/", renderPage("usuario_editar.html"))
+	mux.HandleFunc("/seguridad/permisos-perfil/editar/", renderPage("permisos_perfil_editar.html"))
+
 	// Errores
 	mux.HandleFunc("/403", renderPage("403.html"))
 	mux.HandleFunc("/404", renderPage("404.html"))

@@ -51,7 +51,7 @@ function renderModulos(rows = []) {
       <td>${toBooleanBadge(row.bitEstatico ?? row.bit_estatico)}</td>
       <td>
         <div class="table-actions">
-          <button class="btn btn-info btn-table" onclick='editModulo(${JSON.stringify(row)})'>Editar</button>
+          <button class="btn btn-info btn-table" onclick="goEditModulo(${row.id})">Editar</button>
           <button class="btn btn-danger btn-table" onclick="deleteModulo(${row.id})">Eliminar</button>
         </div>
       </td>
@@ -70,6 +70,10 @@ async function loadModulos(page = 1) {
   } catch (error) {
     console.error(error);
   }
+}
+
+function goEditModulo(id) {
+  window.location.href = `/seguridad/modulo/editar/${id}`;
 }
 
 function editModulo(row) {

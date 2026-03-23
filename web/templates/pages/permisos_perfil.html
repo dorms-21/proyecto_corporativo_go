@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Permisos-Perfil - Sistema Corporativo</title>
+  <title>Permisos Perfil</title>
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="stylesheet" href="/static/css/dashboard.css">
   <link rel="stylesheet" href="/static/css/forms.css">
   <link rel="stylesheet" href="/static/css/responsive.css">
 </head>
-<body data-module="permisos_perfil">
+<body>
   <div class="layout">
     <header class="topbar">
       <div class="topbar-inner">
@@ -17,7 +17,7 @@
           <div class="brand-badge">PC</div>
           <div>
             <div>Sistema Corporativo</div>
-            <small>Seguridad / Permisos-Perfil</small>
+            <small>Seguridad / Permisos Perfil</small>
           </div>
         </div>
         <div class="topbar-actions">
@@ -41,84 +41,53 @@
           <span>/</span>
           <span>Seguridad</span>
           <span>/</span>
-          <span class="current">Permisos-Perfil</span>
+          <span class="current">Permisos Perfil</span>
         </nav>
 
         <div class="card">
-          <h1 class="page-title">Módulo Permisos-Perfil</h1>
-          <p class="page-subtitle">Asignación de permisos CRUD por perfil y por módulo. Sin filtrado.</p>
+          <h1 class="page-title">Permisos Perfil</h1>
+          <p class="page-subtitle">Asigna permisos por perfil usando una tabla tipo matriz.</p>
         </div>
 
         <div class="card">
-          <form id="formPermisosPerfil" class="form-grid">
-            <input type="hidden" id="permisoPerfilId">
-
-            <div class="form-group">
-              <label for="idPerfilPermiso">Perfil</label>
-              <select id="idPerfilPermiso" required>
-                <option value="">Seleccione</option>
-              </select>
-              <small class="error-text" id="errorPerfilPermiso"></small>
+          <div class="form-grid">
+            <div class="form-group form-group-full">
+              <label for="perfilSelector">Perfil</label>
+              <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <select id="perfilSelector" style="flex:1;">
+                  <option value="">Seleccione</option>
+                </select>
+                <button type="button" class="btn btn-success" id="btnBuscarPermisos">Buscar</button>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label for="idModuloPermiso">Módulo</label>
-              <select id="idModuloPermiso" required>
-                <option value="">Seleccione</option>
-              </select>
-              <small class="error-text" id="errorModuloPermiso"></small>
-            </div>
-
-            <div class="permissions-grid form-group-full">
-              <label class="permission-item">
-                <input type="checkbox" id="bitAgregar"> Agregar
-              </label>
-              <label class="permission-item">
-                <input type="checkbox" id="bitEditar"> Editar
-              </label>
-              <label class="permission-item">
-                <input type="checkbox" id="bitConsulta"> Consulta
-              </label>
-              <label class="permission-item">
-                <input type="checkbox" id="bitEliminar"> Eliminar
-              </label>
-              <label class="permission-item">
-                <input type="checkbox" id="bitDetalle"> Detalle
-              </label>
-            </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-success">Guardar</button>
-              <button type="button" class="btn btn-secondary" id="btnCancelarPermiso">Cancelar</button>
-            </div>
-          </form>
+          </div>
         </div>
 
         <div class="card">
           <div class="table-responsive">
-            <table class="table">
+            <table class="table permisos-matriz">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Perfil</th>
                   <th>Módulo</th>
                   <th>Agregar</th>
                   <th>Editar</th>
-                  <th>Consulta</th>
                   <th>Eliminar</th>
+                  <th>Consultar</th>
                   <th>Detalle</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
-              <tbody id="tablaPermisosPerfil">
+              <tbody id="tablaPermisosMatriz">
                 <tr>
-                  <td colspan="9" class="table-empty">Sin datos</td>
+                  <td colspan="6" class="table-empty">Selecciona un perfil</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div class="pagination" id="paginacionPermisos"></div>
+          <div class="form-actions" style="margin-top:20px;">
+            <button type="button" class="btn btn-success" id="btnGuardarPermisosMatriz">Guardar</button>
+            <a href="/dashboard" class="btn btn-secondary">Cancelar</a>
+          </div>
         </div>
       </section>
     </main>
@@ -126,6 +95,6 @@
 
   <script src="/static/js/utils.js"></script>
   <script src="/static/js/menu.js"></script>
-  <script src="/static/js/permisos_perfil.js"></script>
+  <script src="/static/js/permisos_perfil_matriz.js"></script>
 </body>
 </html>
