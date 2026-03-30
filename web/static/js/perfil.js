@@ -1,44 +1,70 @@
 let perfilPage = 1;
 const perfilLimit = 5;
 
-function validatePerfilForm() {
-  clearTextErrors();
-  const nombre = qs("#strNombrePerfil")?.value.trim() || "";
-  let valid = true;
+function getPerfilPerms() {
+  const permissions = getPermissions();
+  return permissions.perfil || {
+    agregar: false,
+    editar: false,
+    consulta: false,
+    eliminar: false,
+    detalle: false
+  };
+}
 
-  if (!nombre) {
-    showTextError("errorNombrePerfil", "El nombre del perfil es obligatorio");
-    valid = false;
-  }
+function applyPerfilPermissions() {
+  const perms = getPerfilPerms();
 
-  return valid;
+  if (!perms.agregar) hideElement("#btnNuevoPerfil");
+  if (!perms.consulta) hideElement("#btnBuscarPerfil");
 }
 
 function renderPerfiles(rows = []) {
   const tbody = qs("#tablaPerfiles");
   if (!tbody) return;
 
+  const perms = getPerfilPerms();
+
   if (!rows.length) {
     tbody.innerHTML = `<tr><td colspan="3" class="table-empty">Sin datos</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = rows.map(row => `
-    <tr>
-      <td>${escapeHtml(row.strNombrePerfil || row.str_nombre_perfil || "")}</td>
-      <td>${toBooleanBadge(row.bitAdministrador ?? row.bit_administrador)}</td>
-      <td>
-        <div class="table-actions">
-          <button class="btn btn-info btn-table" onclick="goEditPerfil(${row.id})">Editar</button>
-          <button class="btn btn-danger btn-table" onclick="deletePerfil(${row.id})">Eliminar</button>
-        </div>
-      </td>
-    </tr>
-  `).join("");
+  tbody.innerHTML = rows.map(row => {
+    let acciones = "";
+
+    if (perms.editar) {
+      acciones += `<button class="btn btn-info btn-table" onclick="goEditPerfil(${row.id})">Editar</button>`;
+    }
+
+    if (perms.eliminar) {
+      acciones += `<button class="btn btn-danger btn-table" onclick="deletePerfil(${row.id})">Eliminar</button>`;
+    }
+
+    if (!acciones) {
+      acciones = `<span class="badge badge-info">Sin acciones</span>`;
+    }
+
+    return `
+      <tr>
+        <td>${escapeHtml(row.strNombrePerfil || row.str_nombre_perfil || "")}</td>
+        <td>${toBooleanBadge(row.bitAdministrador ?? row.bit_administrador)}</td>
+        <td>
+          <div class="table-actions">
+            ${acciones}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join("");
 }
 
 async function loadPerfiles(page = 1) {
   perfilPage = page;
+
+  const perms = getPerfilPerms();
+  if (!perms.consulta) return;
+
   try {
     const offset = (page - 1) * perfilLimit;
     const data = await apiFetch(`/perfiles?limit=${perfilLimit}&offset=${offset}`, { method: "GET" });
@@ -72,6 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   setTopbarUser();
   bindLogout();
   renderMenu();
+  applyPerfilPermissions();
   loadPerfiles();
 
   qs("#btnNuevoPerfil")?.addEventListener("click", () => {
