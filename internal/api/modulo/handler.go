@@ -56,6 +56,7 @@ func (h *Handler) HandleByID(w http.ResponseWriter, r *http.Request) {
 
 func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	limit, offset := getLimitOffset(r)
+
 	var total int
 	if err := h.DB.QueryRow(`SELECT COUNT(*) FROM modulo`).Scan(&total); err != nil {
 		writeJSON(w, http.StatusInternalServerError, map[string]any{"message": "Error contando módulos"})
@@ -151,6 +152,11 @@ func (h *Handler) Update(w http.ResponseWriter, r *http.Request, id int64) {
 	m.StrNombreModulo = strings.TrimSpace(m.StrNombreModulo)
 	m.StrClaveModulo = strings.TrimSpace(m.StrClaveModulo)
 	m.StrRuta = strings.TrimSpace(m.StrRuta)
+
+	if m.StrNombreModulo == "" || m.StrClaveModulo == "" || m.StrRuta == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]any{"message": "Nombre, clave y ruta son obligatorios"})
+		return
+	}
 
 	res, err := h.DB.Exec(`
 		UPDATE modulo
