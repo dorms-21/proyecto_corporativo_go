@@ -132,18 +132,23 @@ async function apiFetch(endpoint, options = {}) {
     headers
   });
 
-  if (response.status === 401) {
-    logout();
-    throw new Error("Sesión expirada");
-  }
-
   const contentType = response.headers.get("content-type") || "";
   const data = contentType.includes("application/json")
     ? await response.json()
     : await response.text();
 
+  // IMPORTANTE:
+  // no cerrar sesión automáticamente cuando el error 401 viene del login
+  if (response.status === 401 && endpoint !== "/auth/login") {
+    logout();
+    throw new Error("Sesión expirada");
+  }
+
   if (!response.ok) {
-    const message = data?.message || data?.msg || "Ocurrió un error";
+    const message =
+      data?.message ||
+      data?.msg ||
+      (typeof data === "string" ? data : "Ocurrió un error");
     throw new Error(message);
   }
 
