@@ -27,6 +27,7 @@ func RegisterAPIRoutes(mux *http.ServeMux, database *sql.DB, cfg *config.Config)
 
 	mux.HandleFunc("/api/modulos", moduloHandler.Handle)
 	mux.HandleFunc("/api/modulos/", moduloHandler.HandleByID)
+	mux.HandleFunc("/api/modulos/refresh-links", moduloHandler.RefreshLinks)
 
 	mux.HandleFunc("/api/usuarios", usuarioHandler.Handle)
 	mux.HandleFunc("/api/usuarios/", usuarioHandler.HandleByID)

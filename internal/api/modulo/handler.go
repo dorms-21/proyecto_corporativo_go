@@ -54,6 +54,87 @@ func (h *Handler) HandleByID(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func (h *Handler) RefreshLinks(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]any{"message": "Método no permitido"})
+		return
+	}
+
+	rows, err := h.DB.Query(`
+		SELECT id, str_ruta
+		FROM modulo
+		WHERE id NOT IN (
+			SELECT id_modulo FROM menu_modulo
+		)
+		ORDER BY id ASC
+	`)
+	if err != nil {
+		writeJSON(w, http.StatusInternalServerError, map[string]any{"message": "Error leyendo módulos"})
+		return
+	}
+	defer rows.Close()
+
+	type rowData struct {
+		ID   int64
+		Ruta string
+	}
+
+	var modulos []rowData
+	for rows.Next() {
+		var m rowData
+		if err := rows.Scan(&m.ID, &m.Ruta); err != nil {
+			writeJSON(w, http.StatusInternalServerError, map[string]any{"message": "Error procesando módulos"})
+			return
+		}
+		modulos = append(modulos, m)
+	}
+
+	inserted := 0
+
+	for _, m := range modulos {
+		menuName := ""
+
+		switch {
+		case strings.HasPrefix(m.Ruta, "/seguridad/"):
+			menuName = "Seguridad"
+		case strings.HasPrefix(m.Ruta, "/principal1/"):
+			menuName = "Principal 1"
+		case strings.HasPrefix(m.Ruta, "/principal2/"):
+			menuName = "Principal 2"
+		default:
+			continue
+		}
+
+		var idMenu int64
+		err := h.DB.QueryRow(`SELECT id FROM menu WHERE str_nombre_menu = $1`, menuName).Scan(&idMenu)
+		if err != nil {
+			continue
+		}
+
+		var nextOrder int
+		_ = h.DB.QueryRow(`
+			SELECT COALESCE(MAX(int_orden), 0) + 1
+			FROM menu_modulo
+			WHERE id_menu = $1
+		`, idMenu).Scan(&nextOrder)
+
+		_, err = h.DB.Exec(`
+			INSERT INTO menu_modulo (id_menu, id_modulo, int_orden)
+			VALUES ($1, $2, $3)
+			ON CONFLICT (id_menu, id_modulo) DO NOTHING
+		`, idMenu, m.ID, nextOrder)
+
+		if err == nil {
+			inserted++
+		}
+	}
+
+	writeJSON(w, http.StatusOK, map[string]any{
+		"message":  "Módulos refrescados correctamente",
+		"inserted": inserted,
+	})
+}
+
 func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	limit, offset := getLimitOffset(r)
 
@@ -135,7 +216,10 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	`, m.StrNombreModulo, m.StrClaveModulo, m.StrRuta, m.BitEstatico).Scan(&m.ID)
 
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]any{"message": "Error creando módulo"})
+		writeJSON(w, http.StatusInternalServerError, map[string]any{
+			"message": "Error creando módulo",
+			"detail":  err.Error(),
+		})
 		return
 	}
 
@@ -168,7 +252,10 @@ func (h *Handler) Update(w http.ResponseWriter, r *http.Request, id int64) {
 	`, m.StrNombreModulo, m.StrClaveModulo, m.StrRuta, m.BitEstatico, id)
 
 	if err != nil {
-		writeJSON(w, http.StatusInternalServerError, map[string]any{"message": "Error actualizando módulo"})
+		writeJSON(w, http.StatusInternalServerError, map[string]any{
+			"message": "Error actualizando módulo",
+			"detail":  err.Error(),
+		})
 		return
 	}
 

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Módulo - Sistema Corporativo</title>
+  <title>{{.Title}} - Sistema Corporativo</title>
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="stylesheet" href="/static/css/dashboard.css">
   <link rel="stylesheet" href="/static/css/forms.css">
   <link rel="stylesheet" href="/static/css/responsive.css">
 </head>
-<body data-module="modulo">
+<body data-module="generic_module">
   <div class="layout">
     <header class="topbar">
       <div class="topbar-inner">
@@ -17,7 +17,7 @@
           <div class="brand-badge">PC</div>
           <div>
             <div>Sistema Corporativo</div>
-            <small>Seguridad / Módulo</small>
+            <small>Módulo dinámico</small>
           </div>
         </div>
         <div class="topbar-actions">
@@ -39,45 +39,47 @@
         <nav class="breadcrumb">
           <a href="/dashboard">Inicio</a>
           <span>/</span>
-          <span>Seguridad</span>
-          <span>/</span>
-          <span class="current">Módulo</span>
+          <span class="current">{{.ModuleName}}</span>
         </nav>
 
         <div class="card">
-          <h1 class="page-title">Módulo Módulo</h1>
-          <p class="page-subtitle">Administra los módulos funcionales y estáticos del sistema.</p>
+          <h1 class="page-title">{{.ModuleName}}</h1>
+          <p class="page-subtitle">{{.Description}}</p>
         </div>
 
         <div class="card">
           <div class="toolbar">
-            <button class="btn btn-success" id="btnNuevoModulo">Nuevo</button>
-            <button class="btn btn-info" id="btnBuscarModulo">Consultar</button>
-            <button class="btn btn-primary" id="btnRefrescarModulos">Refrescar módulos</button>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Clave</th>
-                  <th>Ruta</th>
-                  <th>Estático</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tablaModulos">
-                <tr>
-                  <td colspan="5" class="table-empty">Sin datos</td>
-                </tr>
-              </tbody>
-            </table>
+            <button type="button" class="btn btn-success">Nuevo</button>
+            <button type="button" class="btn btn-info">Consultar</button>
+            <button type="button" class="btn btn-warning">Editar</button>
+            <button type="button" class="btn btn-danger">Eliminar</button>
           </div>
 
-          <div class="pagination" id="paginacionModulos"></div>
+          <form class="form-grid">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" placeholder="Nombre">
+            </div>
+
+            <div class="form-group">
+              <label>Descripción</label>
+              <input type="text" placeholder="Descripción">
+            </div>
+
+            <div class="form-group">
+              <label>Ruta</label>
+              <input type="text" value="{{.Route}}" readonly>
+            </div>
+
+            <div class="form-group">
+              <label>Estado</label>
+              <select>
+                <option>Seleccione</option>
+                <option>Activo</option>
+                <option>Inactivo</option>
+              </select>
+            </div>
+          </form>
         </div>
       </section>
     </main>
@@ -85,6 +87,6 @@
 
   <script src="/static/js/utils.js"></script>
   <script src="/static/js/menu.js"></script>
-  <script src="/static/js/modulo.js"></script>
+  <script src="/static/js/principal.js"></script>
 </body>
 </html>

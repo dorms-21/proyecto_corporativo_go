@@ -93,6 +93,24 @@ async function deleteModulo(id) {
   }
 }
 
+async function refreshModules() {
+  try {
+    const res = await apiFetch("/modulos/refresh-links", {
+      method: "POST"
+    });
+
+    const me = await apiFetch("/auth/me", { method: "GET" });
+    if (me.user) saveUser(me.user);
+    if (me.menus) saveMenus(me.menus);
+    if (me.permissions) savePermissions(me.permissions);
+
+    alert(`${res.message}. Nuevos enlaces agregados: ${res.inserted}`);
+    window.location.href = "/dashboard";
+  } catch (error) {
+    alert(error.message || "No se pudieron refrescar los módulos");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const ok = await verifySession();
   if (!ok) return;
@@ -106,4 +124,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   qs("#btnNuevoModulo")?.addEventListener("click", () => {
     window.location.href = "/seguridad/modulo/nuevo";
   });
+
+  qs("#btnRefrescarModulos")?.addEventListener("click", refreshModules);
 });
