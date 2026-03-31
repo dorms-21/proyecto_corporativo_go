@@ -13,6 +13,7 @@ import (
 type GenericModulePageData struct {
 	Title       string
 	ModuleName  string
+	ModuleKey   string
 	Route       string
 	Description string
 }
@@ -109,12 +110,14 @@ func renderGenericModulePage(database *sql.DB) http.HandlerFunc {
 		}
 
 		var moduleName string
+		var moduleKey string
+
 		err := database.QueryRow(`
-			SELECT str_nombre_modulo
+			SELECT str_nombre_modulo, str_clave_modulo
 			FROM modulo
 			WHERE str_ruta = $1
 			LIMIT 1
-		`, path).Scan(&moduleName)
+		`, path).Scan(&moduleName, &moduleKey)
 
 		if err != nil {
 			http.Redirect(w, r, "/404", http.StatusSeeOther)
@@ -131,6 +134,7 @@ func renderGenericModulePage(database *sql.DB) http.HandlerFunc {
 		data := GenericModulePageData{
 			Title:       moduleName,
 			ModuleName:  moduleName,
+			ModuleKey:   strings.ToLower(moduleKey),
 			Route:       path,
 			Description: "Pantalla generada automáticamente para módulos nuevos.",
 		}

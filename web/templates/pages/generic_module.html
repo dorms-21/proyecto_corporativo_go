@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/static/css/forms.css">
   <link rel="stylesheet" href="/static/css/responsive.css">
 </head>
-<body data-module="generic_module">
+<body data-module="{{.ModuleKey}}">
   <div class="layout">
     <header class="topbar">
       <div class="topbar-inner">
@@ -53,6 +53,7 @@
             <button type="button" class="btn btn-info">Consultar</button>
             <button type="button" class="btn btn-warning">Editar</button>
             <button type="button" class="btn btn-danger">Eliminar</button>
+            <button type="button" class="btn btn-secondary">Detalle</button>
           </div>
 
           <form class="form-grid">
@@ -78,6 +79,11 @@
                 <option>Activo</option>
                 <option>Inactivo</option>
               </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-success">Guardar</button>
+              <button type="button" class="btn btn-secondary">Cancelar</button>
             </div>
           </form>
         </div>
