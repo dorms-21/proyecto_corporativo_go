@@ -94,12 +94,12 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	log.Println("usuario encontrado:", user.StrNombreUsuario)
 	log.Println("estado:", user.EstadoNombre)
 
-	if strings.ToUpper(user.EstadoNombre) != "ACTIVO" {
-		writeJSON(w, http.StatusUnauthorized, map[string]any{
-			"message": "El usuario está inactivo",
-		})
-		return
-	}
+if strings.ToUpper(user.EstadoNombre) != "ACTIVO" {
+	writeJSON(w, http.StatusUnauthorized, map[string]any{
+		"message": "Esta cuenta tiene estado inactivo. Contacte a soporte.",
+	})
+	return
+}
 
 	if plainPassword != req.Password {
 		log.Println("password incorrecto")

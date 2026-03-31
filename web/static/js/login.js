@@ -53,15 +53,11 @@ async function handleLoginSubmit(event) {
     captcha: qs("#captcha").value.trim().toUpperCase()
   };
 
-  console.log("intentando login con:", payload.usuario);
-
   try {
     const data = await apiFetch("/auth/login", {
       method: "POST",
       body: JSON.stringify(payload)
     });
-
-    console.log("respuesta login:", data);
 
     if (data.token) setToken(data.token);
     if (data.user) saveUser(data.user);
@@ -71,7 +67,15 @@ async function handleLoginSubmit(event) {
     window.location.href = "/dashboard";
   } catch (error) {
     console.error("error login:", error);
-    showAlert("loginError", error.message || "No fue posible iniciar sesión");
+
+    const msg = error.message || "No fue posible iniciar sesión";
+
+    if (msg.toLowerCase().includes("inactivo")) {
+      alert("Esta cuenta tiene estado inactivo.\n\nContacte a soporte para solicitar acceso.");
+    } else {
+      showAlert("loginError", msg);
+    }
+
     generateCaptcha();
   }
 }
